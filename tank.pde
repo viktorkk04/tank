@@ -1,38 +1,22 @@
-int x;
-int y;
-void setup(){
-  size(1920, 1080);
-  frameRate(300);
+PImage tank;
+
+void setup() {
+  size(1920, 800
+  );
+  rectMode(CENTER);
   
-  x = 0;
-  y = 1920;
+  tank = loadImage("Tank1.jpg");
 }
 
-void draw(){
-  background(0,0,0);
-  noStroke();
-  smooth();
-  //your tank
-  filter( BLUR, 0 );
+void draw() {
+  background(0);
   
-  fill(255,0,0);
-  circle(x, height/2, 200);
+  // Calculate the angle of rotation based on mouseX and mouseY
+  float angle = atan2(mouseY - height / 2, mouseX - width / 2);
   
-  filter( BLUR, 6 );
-  stroke(0);
-  circle(x,height/2,80);
+  translate(width / 2, height / 2);
+  rotate(angle);
   
-  
-  
-  //enemy tank
-  filter( BLUR, 0 );
-  
-  fill(0,0,255);
-  circle(y,height/2,100);
-  
-  filter( BLUR, 6 );
-  stroke(0);
-  circle(y,height/2,80);
-  x+=10;
-  y+=-10;
+  // Draw the rotated tank image
+  image(tank, -tank.width / 2, -tank.height / 2);
 }
